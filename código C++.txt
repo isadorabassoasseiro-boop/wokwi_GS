@@ -1,0 +1,132 @@
+#include "DHT.h"
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
+
+#define DHTPIN 2
+#define DHTTYPE DHT22
+
+#define CHUVA_PIN A0
+
+#define LED_VERDE 8
+#define LED_AMARELO 9
+#define LED_VERMELHO 10
+
+DHT dht(DHTPIN, DHTTYPE);
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+
+void setup() {
+  Serial.begin(9600);
+  dht.begin();
+
+  lcd.init();
+  lcd.backlight();
+
+  pinMode(CHUVA_PIN, INPUT);
+  pinMode(LED_VERDE, OUTPUT);
+  pinMode(LED_AMARELO, OUTPUT);
+  pinMode(LED_VERMELHO, OUTPUT);
+
+  lcd.setCursor(0, 0);
+  lcd.print("AgroSat Monitor");
+  lcd.setCursor(0, 1);
+  lcd.print("Iniciando...");
+  delay(2000);
+}
+
+void loop() {
+  float temperatura = dht.readTemperature();
+  float umidade = dht.readHumidity();
+
+  int leituraChuva = analogRead(CHUVA_PIN);
+  int chuva = map(leituraChuva, 0, 1023, 100, 0);
+
+  String analiseTemperatura;
+  String analiseUmidade;
+  String analiseChuva;
+  String risco;
+
+  if (temperatura > 35) {
+    analiseTemperatura = "Alta";
+  } else if (temperatura > 28 && temperatura < 35) {
+    analiseTemperatura = "Moderado";
+  } else {
+    analiseTemperatura = "Baixo";
+  }
+
+  if (umidade < 30) {
+    analiseUmidade = "Baixo";
+  } else if (umidade > 30 && umidade < 50) {
+    analiseUmidade = "Moderado";
+  } else {
+    analiseUmidade = "Alta";
+  }
+
+  if (chuva > 80) {
+    analiseChuva = "Alta";
+  } else if (chuva > 40 && chuva < 80) {
+    analiseChuva = "Moderado";
+  } else {
+    analiseChuva = "Baixo";
+  }
+
+  if (analiseTemperatura == "Alta" &&
+      analiseUmidade == "Baixo" &&
+      analiseChuva == "Baixo") {
+    risco = "Critico";
+  } else if (analiseTemperatura == "Moderado" &&
+             analiseUmidade == "Moderado" &&
+             analiseChuva == "Moderado") {
+    risco = "Baixo";
+  } else if (analiseTemperatura == "Alta" ||
+             analiseChuva == "Alta") {
+    risco = "Alto";
+  } else {
+    risco = "Moderado";
+  }
+
+  digitalWrite(LED_VERDE, LOW);
+  digitalWrite(LED_AMARELO, LOW);
+  digitalWrite(LED_VERMELHO, LOW);
+
+  if (risco == "Baixo") {
+    digitalWrite(LED_VERDE, HIGH);
+  } else if (risco == "Moderado") {
+    digitalWrite(LED_AMARELO, HIGH);
+  } else {
+    digitalWrite(LED_VERMELHO, HIGH);
+  }
+
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("T:");
+  lcd.print(temperatura, 1);
+  lcd.print("C U:");
+  lcd.print(umidade, 0);
+  lcd.print("%");
+
+  lcd.setCursor(0, 1);
+  lcd.print("C:");
+  lcd.print(chuva);
+  lcd.print("% R:");
+  lcd.print(risco);
+
+  Serial.println("===== ORBITGUARD =====");
+  Serial.print("Temperatura: ");
+  Serial.print(temperatura);
+  Serial.println(" C");
+
+  Serial.print("Umidade: ");
+  Serial.print(umidade);
+  Serial.println("%");
+
+  Serial.print("Chuva simulada: ");
+  Serial.print(chuva);
+  Serial.println("%");
+
+  Serial.print("Risco geral: ");
+  Serial.println(risco);
+
+  Serial.println("---------------------------");
+
+  delay(3000);
+}
