@@ -12,6 +12,8 @@ A proposta do projeto é simular um sistema inteligente inspirado em tecnologias
 
 Com base nesses dados, o sistema identifica níveis de risco agrícola e apresenta os resultados visualmente por meio de LEDs e display LCD.
 
+Além disso, esta simulação em Arduino funciona como uma etapa de coleta de dados ambientais para o sistema desenvolvido em Python. As informações capturadas pelo Arduino são utilizadas posteriormente no projeto em Python para realizar análises de desastres naturais agrícolas, classificação de riscos climáticos e geração de recomendações preventivas.
+
 ---
 
 # 🎯 Objetivo da Solução
@@ -63,6 +65,27 @@ Esses dados são enviados ao Arduino para análise.
 A intensidade da chuva é simulada utilizando um **potenciômetro** conectado à entrada analógica `A0` do Arduino.
 
 O sistema converte os valores analógicos em porcentagem de chuva simulada.
+
+---
+
+## 📡 Integração com o Sistema em Python
+
+O Arduino atua como uma etapa de monitoramento climático responsável pela coleta dos dados ambientais da plantação.
+
+As informações coletadas pelo circuito:
+
+- temperatura;
+- umidade;
+- intensidade da chuva;
+
+são utilizadas no sistema desenvolvido em Python para realizar:
+
+- análise climática;
+- classificação de risco;
+- identificação de possíveis desastres naturais agrícolas;
+- geração de recomendações preventivas.
+
+Dessa forma, o Arduino funciona como uma simulação de sensores ambientais conectados a uma central inteligente de monitoramento agrícola.
 
 ---
 
@@ -210,7 +233,8 @@ O sistema deverá:
 
 - 📟 exibir os dados no LCD;
 - 📊 mostrar o risco climático;
-- 💡 acender os LEDs conforme o risco identificado.
+- 💡 acender os LEDs conforme o risco identificado;
+- 📡 simular a coleta de dados ambientais utilizados pelo sistema em Python.
 
 ---
 
@@ -218,6 +242,7 @@ O sistema deverá:
 
 - Arduino C/C++;
 - Wokwi Simulator;
+- Python;
 - Sensores DHT11;
 - LCD I2C;
 - Componentes eletrônicos básicos.
@@ -227,3 +252,4 @@ O sistema deverá:
 # 🌍 Finalidade do Projeto
 
 O projeto foi desenvolvido com foco em soluções tecnológicas para agricultura inteligente, buscando reduzir impactos causados por mudanças climáticas e auxiliar no monitoramento preventivo de riscos agrícolas.
+O projeto foi desenvolvido com foco em soluções tecnológicas para agricultura inteligente, buscando reduzir impactos causados por mudanças climáticas e auxiliar no monitoramento preventivo de riscos agrícolas.uscando reduzir impactos causados por mudanças climáticas e auxiliar no monitoramento preventivo de riscos agrícolas.
