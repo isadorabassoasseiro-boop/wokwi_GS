@@ -252,4 +252,3 @@ O sistema deverá:
 # 🌍 Finalidade do Projeto
 
 O projeto foi desenvolvido com foco em soluções tecnológicas para agricultura inteligente, buscando reduzir impactos causados por mudanças climáticas e auxiliar no monitoramento preventivo de riscos agrícolas.
-O projeto foi desenvolvido com foco em soluções tecnológicas para agricultura inteligente, buscando reduzir impactos causados por mudanças climáticas e auxiliar no monitoramento preventivo de riscos agrícolas.uscando reduzir impactos causados por mudanças climáticas e auxiliar no monitoramento preventivo de riscos agrícolas.
