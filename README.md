@@ -1,5 +1,11 @@
 # 🌱 OrbitGuard
 
+## 👥 Integrantes
+
+Isadora Basso Asseiro - RM: 569323
+
+Gabriella Viana Lisbôa - RM: 573504
+
 ## 📖 Descrição do Projeto
 
 O **OrbitGuard** é uma solução tecnológica desenvolvida para auxiliar no monitoramento climático agrícola. O sistema utiliza sensores conectados ao Arduino para coletar dados ambientais em tempo real, permitindo a análise de riscos relacionados às mudanças climáticas que podem afetar plantações.
